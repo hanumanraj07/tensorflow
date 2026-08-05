@@ -406,9 +406,6 @@ Build(
         "-//xla/backends/profiler/subprocess:subprocess_profiling_session_test",
         "-//xla/backends/profiler/subprocess:subprocess_registry",
         "-//xla/backends/profiler/subprocess:subprocess_registry_test",
-        "-//xla/tools/benchmarks/utils:generate_benchmark_matrices_cc",
-        "-//xla/tools/benchmarks/utils:generate_benchmark_matrices_main",
-        "-//xla/tools/benchmarks/utils:generate_benchmark_matrices_test",
         # xnnpack is not windows compatible
         "-//xla/backends/cpu/runtime/ynnpack:ynn_fusion_thunk",
         "-//xla/backends/cpu/runtime/ynnpack:ynn_interop",
@@ -815,9 +812,6 @@ Build(
     ),
     override_module={
         "xla": f"{_GITHUB_WORKSPACE}/openxla/xla",
-        # TODO(alekstheod): remove when jax is migrated to
-        # latest the rules_ml_toolchain
-        "rules_ml_toolchain": f"{_GITHUB_WORKSPACE}/openxla/rules_ml_toolchain",
     },
     options=_DEFAULT_BAZEL_OPTIONS,
     repo_env={"HERMETIC_PYTHON_VERSION": "3.12"},
@@ -924,6 +918,7 @@ Build(
         "-//tensorflow/python/kernel_tests/...",
         "-//tensorflow/python/data/...",
         "-//tensorflow/python/compiler/tensorrt/...",
+        "-//tensorflow/python/ops/numpy_ops/tests/...",
     ),
     build_tag_filters=tensorflow_cpu_tag_filters,
     test_tag_filters=tensorflow_cpu_tag_filters,
@@ -955,6 +950,7 @@ Build(
         "-//tensorflow/python/kernel_tests/...",
         "-//tensorflow/python/data/...",
         "-//tensorflow/python/compiler/tensorrt/...",
+        "-//tensorflow/python/ops/numpy_ops/tests/...",
     ),
     build_tag_filters=tensorflow_gpu_tag_filters,
     test_tag_filters=tensorflow_gpu_tag_filters,
